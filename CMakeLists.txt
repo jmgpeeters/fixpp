@@ -16,14 +16,14 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-omit-frame-pointer")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-find_package(GTest)
-if (GTEST_FOUND)
-    include_directories(${GTEST_INCLUDE_DIRS})
-else()
-    ADD_SUBDIRECTORY(googletest-release-1.8.0)
-    include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
-endif()
+#find_package(GTest)
+#if (GTEST_FOUND)
+#    include_directories(${GTEST_INCLUDE_DIRS})
+#else()
+#    ADD_SUBDIRECTORY(googletest-release-1.8.0)
+#    include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+#endif()
 
-enable_testing()
-add_subdirectory(tests)
+#enable_testing()
+#add_subdirectory(tests)
 
