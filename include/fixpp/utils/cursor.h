@@ -341,7 +341,7 @@ inline bool match_double(double* val, StreamCursor& cursor)
 inline bool match_int(int* val, StreamCursor& cursor)
 {
     char *end;
-    *val = strtol(cursor.offset(), &end, 10);
+    *val = static_cast<int>(strtol(cursor.offset(), &end, 10));
     if (end == cursor.offset())
         return false;
 
