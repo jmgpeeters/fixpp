@@ -32,7 +32,7 @@ namespace Fixpp
 			
 			using Logon = MessageV<Chars<'A'>,
                   Required<Tag::EncryptMethod>, Required<Tag::HeartBtInt>, Tag::RawDataLength, Tag::RawData,
-                  Tag::ResetSeqNumFlag, Tag::MaxMessageSize,
+                  Tag::ResetSeqNumFlag, Tag::MaxMessageSize, Tag::Account,
                   RepeatingGroup<Tag::NoMsgTypes, Tag::RefMsgType, Tag::MsgDirection>
              >;
 
