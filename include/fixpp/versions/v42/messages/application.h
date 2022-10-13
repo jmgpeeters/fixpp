@@ -151,14 +151,25 @@ namespace Fixpp
                 >
             >;
 
+            //using OrderCancelRequest = MessageV<Chars<'F'>,
+            //      Required<Tag::OrigClOrdID>, Tag::OrderID, Required<Tag::ClOrdID>, Tag::ListID, Tag::Account, Tag::ClientID, Tag::ExecBroker,
+            //     Required<Tag::Symbol>, Tag::SymbolSfx, Tag::SecurityID, Tag::IDSource, Tag::SecurityType, Tag::MaturityMonthYear, Tag::MaturityDay,
+            //      Tag::PutOrCall, Tag::StrikePrice, Tag::OptAttribute, Tag::ContractMultiplier, Tag::CouponRate, Tag::SecurityExchange, Tag::Issuer,
+            //      Tag::EncodedIssuerLen, Tag::EncodedIssuer, Tag::SecurityDesc, Tag::EncodedSecurityDescLen, Tag::EncodedSecurityDesc,
+            //      Required<Tag::Side>, Required<Tag::TransactTime>, Tag::OrderQty, Tag::CashOrderQty, Tag::ComplianceID, Tag::SolicitedFlag,
+            //      Tag::Text, Tag::EncodedTextLen, Tag::EncodedText
+            //>;
+
+
             using OrderCancelRequest = MessageV<Chars<'F'>,
-                  Required<Tag::OrigClOrdID>, Tag::OrderID, Required<Tag::ClOrdID>, Tag::ListID, Tag::Account, Tag::ClientID, Tag::ExecBroker,
-                  Required<Tag::Symbol>, Tag::SymbolSfx, Tag::SecurityID, Tag::IDSource, Tag::SecurityType, Tag::MaturityMonthYear, Tag::MaturityDay,
+                  Tag::OrigClOrdID, Tag::OrderID, Tag::ClOrdID, Tag::ListID, Tag::Account, Tag::ClientID, Tag::ExecBroker,
+                  Tag::Symbol, Tag::SymbolSfx, Tag::SecurityID, Tag::IDSource, Tag::SecurityType, Tag::MaturityMonthYear, Tag::MaturityDay,
                   Tag::PutOrCall, Tag::StrikePrice, Tag::OptAttribute, Tag::ContractMultiplier, Tag::CouponRate, Tag::SecurityExchange, Tag::Issuer,
                   Tag::EncodedIssuerLen, Tag::EncodedIssuer, Tag::SecurityDesc, Tag::EncodedSecurityDescLen, Tag::EncodedSecurityDesc,
-                  Required<Tag::Side>, Required<Tag::TransactTime>, Tag::OrderQty, Tag::CashOrderQty, Tag::ComplianceID, Tag::SolicitedFlag,
+                  Tag::Side, Tag::TransactTime, Tag::OrderQty, Tag::CashOrderQty, Tag::ComplianceID, Tag::SolicitedFlag,
                   Tag::Text, Tag::EncodedTextLen, Tag::EncodedText
             >;
+	    
 
             using OrderCancelReplaceRequest = MessageV<Chars<'G'>,
                   Tag::OrderID, Tag::ClientID, Tag::ExecBroker, Required<Tag::OrigClOrdID>, Required<Tag::ClOrdID>, Tag::ListID, Tag::Account,
