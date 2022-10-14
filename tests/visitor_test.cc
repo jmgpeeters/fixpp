@@ -555,9 +555,34 @@ struct AssertVisitor : public Fixpp::StaticVisitor<void>
     template<typename Header, typename Message>
     void operator()(Header, Message)
     {
-        ASSERT_TRUE(false);
     }
 };
+
+struct DummyVisitRules : public Fixpp::VisitRules
+{
+    using Overrides = OverrideSet<>;
+    using Dictionary = Fixpp::v42::Spec::Dictionary;
+
+    static constexpr bool ValidateChecksum = false;
+    static constexpr bool ValidateLength = false;
+    static constexpr bool StrictMode = true;
+    static constexpr bool SkipUnknownTags = false;
+};
+
+struct DummyVisitor : public Fixpp::StaticVisitor<void>
+{
+    void operator()(const Fixpp::v42::Header::Ref& headerRef, const Fixpp::v42::Message::ExecutionReport::Ref& message) {
+        std::cout << "Parsed ER." << std::endl;
+    }
+
+    template<typename Header, typename Message>
+    void operator()(Header, Message)
+    {
+        std::cout << "Parsed msg." << std::endl;
+    }
+};
+
+
 
 template<typename Visitor, typename Rules>
 Fixpp::VisitError<typename Visitor::ResultType> doVisit(const char* frame, Visitor visitor)
@@ -781,5 +806,12 @@ TEST(visitor_test, should_skip_unknown_tags)
                         "9066=189718761|10=076|";
 
     auto err = doVisit(frame, should_skip_unknown_tags::Visitor(), should_skip_unknown_tags::VisitRules());
+    ASSERT_TRUE(err.isOk());
+}
+
+TEST(visitor_test, should_parse_ftx_er) {
+    const char *frame = "8=FIX.4.2|9=292|35=8|49=FTX|56=qsav9rHw0xRZygmhzUJBangd8H8VedcwJVQ-SzSV|34=2|52=20221014-09:24:46.263|150=4|17=b6400240-4c8c-4d51-a65d-c9ee02d7b83e|60=20221014-09:24:46.246|37=190049814530|11=HFT_000020221013KKSS00000016|55=SOL/USD|38=0.01|44=25.0|54=1|39=4|14=0.0|151=0.0|6=0|58=User requested cancellation|10=021|";
+    auto err = doVisit(frame, DummyVisitor(), DummyVisitRules());
+    std::cout << "?" << std::endl;
     ASSERT_TRUE(err.isOk());
 }
